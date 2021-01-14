@@ -6,7 +6,7 @@ let playerHasPlayed = false;
 
 let playerPosition = 0;
 
-//I havent found a way to create a empty list of sprites
+//I haven't found a way to create a empty list of sprites
 let sprites = [game.createSprite(2, 2)];
 sprites[0].delete();
 sprites.removeAt(0);
@@ -20,15 +20,15 @@ let playedSlots: number[];
 //A list of all the different weights for the different slots
 let slotWeights: number[];
 
-//A reference list of unplayed slots
-const baseSlots = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+//A reference of an empty board
+//[0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 //The default weight of the boards slots
-const defaultWeights = [4, 1, 4, 1, 8, 1, 4, 1, 4];
+//[4, 1, 4, 1, 8, 1, 4, 1, 4]
 
 //The brightness of the sprite for each player
 const playerBrightness = 255;
-const AIBrightness = 75;
+const AIBrightness = 50;
 
 //How much more wieght a slot will get if it has the possibility to end the game
 const weightDelta = 16;
@@ -45,11 +45,11 @@ function Setup(){
         openSlots.push(i);
     }
 
-    slotWeights = defaultWeights;
+    slotWeights = [4, 1, 4, 1, 8, 1, 4, 1, 4];
 
-    playedSlots = baseSlots;
+    playedSlots = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    GenerateSprite(0, playerBrightness);
+    GenerateSprite(0, 175);
 }
 
 input.onButtonPressed(Button.A, function () {
@@ -122,7 +122,7 @@ function AIPlay(){
     } else {
         playerHasPlayed = false;
         playerPosition = 0;
-        GenerateSprite(playerPosition, playerBrightness);
+        GenerateSprite(playerPosition, 150);
     }    
 }
 
@@ -188,9 +188,6 @@ function AdjustWeights(adjustedIndex: number){
     if(d >= 0){
     slotWeights[GetOpenSlotIndexFromNum(d)] += weightDelta;
     }
-    
-    console.log(openSlots);
-    console.log(slotWeights);
 }
 
 function AdjustSlot(placedPosition: number, direction: string){
@@ -322,6 +319,7 @@ function AdjustDiagonal(num: number){
 }
 
 function GenerateSprite(spritePositionIndex: number, brightness: number){
+    basic.pause(500);
     let tempSprite = game.createSprite(GetPositionFromSlotsX(openSlots[spritePositionIndex]), GetPositionFromSlotsY(openSlots[spritePositionIndex]));
     tempSprite.setBrightness(brightness);
     sprites.push(tempSprite);
@@ -359,6 +357,9 @@ function SelectSlot(player: number, playedIndex: number){
     AdjustWeights(playedIndex);
     slotWeights.removeAt(playedIndex);
     openSlots.removeAt(playedIndex);
+    if(player == 1){
+        sprites[sprites.length-1].setBrightness(playerBrightness);
+    }
 }
 
 function CheckWinner(){
