@@ -180,13 +180,13 @@ function AdjustWeights(adjustedIndex: number){
 
     //Increases the chance for a slot to be picked by the AI player
     if(x >= 0){
-    slotWeights[GetOpenSlotIndexFromNum(x)] += weightDelta;
+        slotWeights[GetOpenSlotIndexFromNum(x)] += weightDelta;
     }
     if(y >= 0){
         slotWeights[GetOpenSlotIndexFromNum(y)] += weightDelta;
     }
     if(d >= 0){
-    slotWeights[GetOpenSlotIndexFromNum(d)] += weightDelta;
+        slotWeights[GetOpenSlotIndexFromNum(d)] += weightDelta;
     }
 }
 
@@ -326,30 +326,30 @@ function GenerateSprite(spritePositionIndex: number, brightness: number){
 }
 
 function PlayerTurn(input: number){
-        switch(input){
-            case 0:
+    switch(input){
+        case 0:
             playerPosition--;
-            break;
+        break;
 
-            case 1:
+        case 1:
             playerPosition++;
-            break;
+        break;
 
-            case 2:
+        case 2:
             playerHasPlayed = true;
-            break;
-        }
+        break;
+    }
 
-        if(playerHasPlayed){
-            SelectSlot(1, playerPosition);
-            if(CheckWinner()){
+    if(playerHasPlayed){
+        SelectSlot(1, playerPosition);
+        if(CheckWinner()){
             ShowWinner();
         } else {
             AIPlay();
-            }
-        } else {
-            MoveSprite(playerPosition);
         }
+    } else {
+        MoveSprite(playerPosition);
+    }
 }
 
 function SelectSlot(player: number, playedIndex: number){
@@ -433,9 +433,7 @@ function ShowWinner(){
     ClearSprites();
 
     basic.showString("W:" + playerScore)
-
     basic.showString("L:" + AIScore);
-
     basic.showString("T:" + ties);
 
     basic.pause(500);
