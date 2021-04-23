@@ -6,18 +6,18 @@ let playerHasPlayed = false;
 
 let playerPosition = 0;
 
-//I haven't found a way to create a empty list of sprites
+//I haven't found a way to create an empty array of sprites
 let sprites = [game.createSprite(2, 2)];
 sprites[0].delete();
 sprites.removeAt(0);
 
-//A lits of all the slots remaning on the board
+//An array of all the slots remaning on the board
 let openSlots: number[];
 
-//A list of all slots chosen and which player chose it
+//An array of all slots chosen and which player chose it
 let playedSlots: number[];
 
-//A list of all the different weights for the different slots
+//An array of all the different weights for the different slots
 let slotWeights: number[];
 
 //A reference of an empty board
